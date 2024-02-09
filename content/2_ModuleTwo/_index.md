@@ -4,7 +4,7 @@ weight: 2
 ---
 
 
-### Here are a few items to helo you get started on this workshop
+### Here are a few items to help you get started on this workshop
 
 - [Quicklabs account](2_moduletwo/21_logistics.html)
   - QL provisioned AWS Account
