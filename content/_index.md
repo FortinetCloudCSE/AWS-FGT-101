@@ -1,18 +1,30 @@
 ---
-title: "FortiGate: Protecting AWS Resources"
+title: "Securing Acme Corp's AWS Traffic Flows with FortiGate NGFW"
 weight: 1
 archetype: home
 ---
 
-# Welcome!
+## Acme Corp is migrating on prem apps/workloads to AWS Public cloud
+
+- 3 tier web apps (TB revised)
+- On-prem to cloud secure connectivity
+
+- ACME CISO
+  - Concerns
+    - Exposure to Internet attacks
+    - Enironment and App segmentation to reduce exploit blast radius 
+  - Corporate Reqirements 
+    - Multi region HA architecture 
+    - Traffic Protection with NGFW featuring FortiGate FortiGuard advanced protection
+
 
 ![](image-fgcp-tgw.png)
 
 
-AWS Software-Defined Networking (SDN) is elastic, complex, and quite different than traditional on-premise networking. In this workshop you will learn how to use FortiGate instances to protect your AWS workloads deployed in common architecture patterns.
+In this workshop you will learn how to use FortiGate NGFW deployed as AWS EC2 instances to protect traffic flows in common AWS architecture patterns as well as some fundamental AWS networking concepts.
 
-This workshop is intended to help accomplish the following:
+Our intent is to help clarify the following:
 
-  * Learn foundational AWS networking concepts such as routing traffic in and out of VPCs for various traffic flows
-  * Use FortiGate instances to secure inbound, outbound, and East-West traffic flows
-  * Introduction to centralized AWS architectures with Transit Gateway
+  * Learn foundational AWS networking concepts such as symetrical routing traffic in and out of VPCs for various traffic flows
+  * Use FortiGate instances in AWS to secure inbound, outbound, and East-West traffic flows
+  * Introduction to FortiGate Security VPC (AWS centralized architecture) with Transit Gateway

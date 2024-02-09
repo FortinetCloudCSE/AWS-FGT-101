@@ -1,14 +1,23 @@
 ---
-title: "Task 4"
+title: "FortiGate Security VPC East/West"
 weight: 4
 ---
 
 
-## Task 4: Secured East West
+## FortiGate Security VPC securing East/West Traffic
+- Goal: Utilize the provisioned Security VPC and Transit gateway architecture to provide Traffic security for East/West (Inter-VPC) flows with FortiGate NGFW
+- Task: Create FortiGate Policy objects and rules allowing East/West traffic to Acme Corp resources
 
 ![](image-fgcp-tgw.png)
 
-- 1. In the FortiGate GUI, navigate to **Policy & Objects > Addresses**, and click **Create new**. Create an address object with the **settings shown below** and click **OK**.
+#### Summarized Steps (click to expand each for details)
+
+1. Create Policy Objects for Acme Resources 
+
+    {{% expand title = "Detailed Steps..." %}}
+
+- **1.1:** In the FortiGate GUI, navigate to **Policy & Objects > Addresses**, and click **Create new**
+- **1.2:** Create an address object with the **settings shown below** and click **OK**.
 
 Name | Type | Sub Type | SDN Connector | Address Type | Filter Value
 ---|---|---|---|---|---
@@ -19,15 +28,40 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 ![](image-t4-2.png)
 
-- 2. Navigate to **Policy & Objects > Firewall Policy** and click **Create new**. Create a new policy with the **settings shown below** and click **OK** to allow east west traffic from Spoke1-Instance1 to Spoke2-Instance1.
+    {{% /expand %}}
+
+2. Create Firewall Policy permitting E/W Traffic
+    
+    {{% expand title = "Detailed Steps..." %}}
+
+- **2.1:** Navigate to **Policy & Objects > Firewall Policy** and click **Create new**
+- **2.2:** Create a new policy with the **settings shown below** and click **OK** to allow east west traffic from Spoke1-Instance1 to Spoke2-Instance1.
 
 ![](image-t4-3.png)
 
-- 3. Navigate to the **EC2 Console** and go to the **Instances page**. Find the **Spoke1-Instance1** instance. Select the instance and click **Connect > EC2 serial console**. Copy the instance ID as this will be the username and click connect. Login to the instance with the instance ID as the username and **`FORTInet123!`** as the password. Run the commands **`ping -c5 10.2.20.10`** and **`curl 10.2.20.10`** to connect to private resources, successfully.  Next, run the command **`ssh 10.2.20.10`** to be blocked by firewall policy. Let's dig deeper to understand how all of this works.
+    {{% /expand %}}
 
-![]()
+3.  Verify connectivity from **Spoke1-Instance1**
 
-- 4. Navigate to **Log & Report > Forward Traffic** and you should logs for the traffic you generated. **Double click** a log entry to view the **Log Details**.
+    {{% expand title = "Detailed Steps..." %}}
+
+- **3.1:** Navigate to the **EC2 Console** and go to the **Instances page**
+- **3.2:** Find & Select the **Spoke1-Instance1** instance and click **Connect > EC2 serial console**. 
+  - Copy the instance ID as this will be the username and click connect. 
+- **3.3:** Login to the EC2 instance:
+  - username: `<<copied Instance ID from above>>`
+  - Password: **`FORTInet123!`**
+- **3.4:** Run the commands **`ping -c5 10.2.20.10`** and **`curl 10.2.20.10`** to connect to private resources, successfully
+- **3.5:** Run the command **`ssh 10.2.20.10`** to be blocked by firewall policy
+ 
+    {{% /expand %}}
+
+4. Let's dig deeper to understand how all of this works.
+
+    {{% expand title = "Detailed Steps..." %}}
+
+- **4.1:** Navigate to **Log & Report > Forward Traffic** and you should logs for the traffic you generated. 
+- **4.2:** **Double click** a log entry to view the **Log Details**.
 
 {{% notice info %}}
 In the **Source and Destination sections** of the log, we see the no NAT is applied and traffic comes in and goes out port2 of the Primary FortiGate. This is because of the VPC routes in the all VPCs (Spoke1, NGFW, and Spoke2)** are working together with the Transit Gateway (TGW) and Transit Gateway route tables to route the east west traffic through the primary FortiGate.  This is a [**centralized design**](https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-appliance-scenario.html) that is also commonly called an appliance, inspection, or security VPC.
@@ -35,6 +69,6 @@ In the **Source and Destination sections** of the log, we see the no NAT is appl
 We can also see denied traffic that is matching the **Implicit Deny** firewall policy.  With adding granular firewall policies & objects including dynamic address objects and security profiles, you can securely control traffic as desired.
 {{% /notice %}}
 
-![]()
+    {{% /expand %}}
 
 **This concludes this task**
