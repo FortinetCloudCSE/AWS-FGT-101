@@ -28,5 +28,3 @@ This environment will run for 90 minutes and then automatically clean up and shu
   - Multiple tabs simplifies navigation when using multiple AWS services
 
 ![](image-awsconsole1.png)
-
-![](image-awsconsole2.png)

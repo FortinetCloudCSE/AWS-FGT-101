@@ -98,7 +98,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
   - Subnet RT
 
 ### Discussion Points
-- EC2 's can be assigned an EIP for public reachability
+- EC2's can be assigned an EIP for public reachability
 - VPC's must have an IGW associated to provide Internet access to any subnet in the VPC
 - Subnets have a default RT associated to them upon creation, allowing default reachability between all subnets in the VC 
 - You can create additional RT within a VPC, and then associate each RT to one or more subnets, altering the routing behavior of ALL TRAFFIC within that subnet.

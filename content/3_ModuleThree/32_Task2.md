@@ -4,7 +4,7 @@ weight: 2
 ---
 
 
-## Private Outbound: wSingle VPC with NATGW 
+## Private Outbound: Single VPC with NATGW 
 - Goal: Establish Outbound only Internet access for EC2 Private instance
 - Task: Adjust the Route table associations so ExPriv-Instance1 can reach the Internet
 

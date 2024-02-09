@@ -29,7 +29,7 @@ Fortinet & AWS components used during this workshop:
 
 ## AWS Reference Architecture Diagram
 
-  * AWS networking offers multiple ways to organize your AWS architecture to take advantage of FortiGate traffic inspection.  Most importantly, traffic must follow a symmetrical routing path (for forward and reverse flows). As long as flows are symetrical, the architecture will work and traffic will flow through FortiGate NGFW for inspection.
+  * AWS networking offers multiple ways to organize your AWS architecture to take advantage of FortiGate traffic inspection.  Most importantly, traffic must follow a symmetrical routing path (for forward and reverse flows). As long as flows are symmetrical, the architecture will work and traffic will flow through FortiGate NGFW for inspection.
   * We will investigate VPC/Subnet/RT configuration for different architecture patterns:
     * **Ingress + Egress in a single VPC**
     * **Centralized Inspection of Ingress + Egress + East-West with multiple VPCs**

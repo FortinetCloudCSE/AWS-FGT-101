@@ -11,3 +11,4 @@ weight: 2
   - QL provisioned FortiGate Cluster in AWS
 - [Detailed Diagram](image-fgcp-tgw.png)
   - open this in new tab
+- [AWS Tips and Tricks](2_moduletwo/23_awstipstricks.html)
