@@ -85,16 +85,18 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
   
 - **4.7:** The VPC route table that you assigned to the public subnet has a default route to the Internet through the AWS Internet Gateway (IGW). Also this instance has an Elastic IP (EIP), a public IP, associated to it. These AWS networking components are allowing the public in/outbound access to work successfully for this instance.
      
-    {{% /expand %}}
+- **4.8** Below is a step by step of the packet handling for the inbound web traffic to ExPub-Instance1.
 
-**<< Add visual for Routing Hops >>**
-- ECHO (call out)
-  - Instance RT
-  - Subnet RT
-  - IGW
-- ECHO REPLY (return path)
-  - IGW RTB (if associated)
-  - Subnet RT
+Hop | Component | Description | Packet |
+---|---|---|---|
+1 | Internet -> IGW | Inbound traffic destined to the EIP is received at the IGW. | **<span style="color:blue">x.x.x.x:src-port</span> -> <span style="color:purple">y.y.y.y:80</span>** |
+2 | IGW -> ExPub-Instance1 | IGW will change the destination IP to the private IP of ExPub-Instance1. The VPC router will route traffic to ExPub-Instance1 as configured in the default VPC route table which is assigned to the IGW. | **<span style="color:blue">x.x.x.x:src-port</span> -> <span style="color:black">10.0.1.10:80</span>** |
+3 | ExPub-Instance1 -> 0.0.0.0/0 IGW| ExPub-Instance1 receives the traffic, seeing the original public source IP, and will reply. This reply traffic is sent to the VPC router (it's default gw) which then routes the traffic to the IGW as configured in the Example-PublicRouteTable. | **<span style="color:black">10.0.1.10:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
+4 | IGW -> Internet | IGW will change the source IP to the associated EIP of ExPub-Instance1 and the IGW will route the traffic out to the internet. | **<span style="color:purple">y.y.y.y:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
+
+  ![](image-t1-5.png)
+
+    {{% /expand %}}
 
 ### Discussion Points
 - EC2 instances can be assigned an EIP for public reachability.
