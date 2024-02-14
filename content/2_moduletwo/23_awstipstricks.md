@@ -17,8 +17,12 @@ weight: 2
   - VPC Route Tables (RT) are similar to static routes in traditional routing
     - Generally they are attached to a subnet impacting the destination routing decisions for that subnet only
     - Putting the pieces together, AWS routing decisions happen at every hop along the traffic path
-      - Symmetrical paths are the most important rule for AWS routing
-        - Traffic must follow the same path in the outbound and inbound direction 
+      {{% notice tip %}} 
+
+Symmetrical paths are the most important rule for AWS routing
+  - Traffic must follow the same path in the outbound and inbound direction
+
+     {{% /notice %}}
     - Sometimes RT can be associated with services (like IGW) allowing special routing decisions in specific scenarios
   - Every VPC has a default RT which allows communication between all subnets in the VPC
     - Every newly created subnet is associated with this default RT
