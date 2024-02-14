@@ -1,5 +1,5 @@
 ---
-title: "Workshop Hands On"
+title: "Workshop Agenda"
 weight: 3
 ---
 
@@ -7,12 +7,11 @@ weight: 3
 ![](image-getready.jpg)
 
 ## Tasks in this workshop
-- Learn about Single VPC traffic flows
-  1. [Public In/Outbound Internet flows w/ IGW](3_modulethree/31_task1.html)
-  2. [Private Outbound Internet flows w/ NATGW](3_modulethree/32_task2.html)
+- AWS Foundational Networking: Learn about Single VPC traffic flows
+  1. [Public In/Outbound Internet flows w/ IGW](4_modulefour/41_task1.html)
+  2. [Private Outbound Internet flows w/ NATGW](4_modulefour/42_task2.html)
   
-- Learn FortiGate Centralized Security VPC and Transit Gateway connectivity
+- Securing Flows with FortiGate: work with FortiGate Secured Centralized VPC and Transit Gateway connectivity
 
-  3. [Centralized In/Outbound Internet Flows](3_modulethree/33_task3.html)
-  4. [East/West Inter-VPC flows](3_modulethree/34_task4.html)
- 
+  3. [Centralized In & outbound Internet Flows](5_modulefive/53_task3.html)
+  4. [East-West Inter VPC flows](5_modulefive/54_task4.html)
