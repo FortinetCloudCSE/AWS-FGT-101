@@ -5,12 +5,12 @@ weight: 1
 
 
 ## Public Inbound: Single VPC with IGW
-- Goal: Establish Internet access for EC2 Public instance (inbound + outbound)
-- Task: Adjust the Route table associations so you can ping ExPub-Instance1
+- Goal: Establish Internet access for EC2 Public instance (inbound + outbound).
+- Task: Adjust the route table associations so you can ping ExPub-Instance1.
 
 {{% notice warning %}} 
 
-There are no security controls in this example. ExPub-Instance1 can freely communicate with the Internet and anybody on the Internet can reach ExPub-Instance1
+There are no security controls in this example. ExPub-Instance1 can freely communicate with the Internet and anybody on the Internet can reach ExPub-Instance1.
 
 {{% /notice %}}
 
@@ -19,55 +19,54 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
 #### Summarized Steps (click to expand each for details)
 
-1. Find the EC2 Instance Public IP and verify it's currently inaccessible
+1. Find the EC2 Instance Public IP and verify it's currently inaccessible.
 
     {{% expand title="Detailed Steps..." %}}
 
-- **1.1:** In your AWS account, navigate to the **EC2 Console** and go to the **Instances page**
-- **1.2:** Find the **ExPub-Instance1** instance, and copy the **Public IP address** 
-- **1.3:** In your command prompt or terminal, ping the **public IPv4 address** of the instance
+- **1.1:** In your AWS account, navigate to the **EC2 Console** and go to the **Instances page** (menu on the left).
+- **1.2:** Find the **ExPub-Instance1** instance, and copy the **Public IP address**.
+- **1.3:** In your command prompt or terminal, ping the **public IPv4 address** of the instance.
    - This **SHOULD NOT** work at this point.
 ![](image-t1-1.png)
 
     {{% /expand %}}
 
-2. Identify the route table and examine routes, then associate the route table to the proper subnet
+2. Identify the route table and examine routes, then associate the route table to the proper subnet.
 
     {{% expand title="Detailed Steps..." %}}
 
-- **2.1:** Navigate to the **VPC Console** and go to the **Subnets page**
-- **2.2:** Find the **Example-PublicSubnet1** subnet & Select the **Route table tab**
-- **2.3:** Click **Edit route table association**
+- **2.1:** Navigate to the **VPC Console** and go to the **Subnets page** (menu on the left).
+- **2.2:** Find the **Example-PublicSubnet1** subnet & Select the **Route table tab**.
+- **2.3:** Click **Edit route table association**.
 - **2.4:** Select the **Example-PublicRouteTable** and click **save**.
 ![](image-t1-2.png)
 ![](image-t1-3.png)
 
   {{% /expand %}}
 
-3. Verify communication to EC2 Public IP. 
+3. Verify communication to the EC2 Instance Public IP. 
 
     {{% expand title="Detailed Steps..." %}}
 
-- **3.1:** Ping the Public IP/DNS of the EC2 instance from your (workstation)
-- **3.2:** browse to the public IP/DNS of the EC2 instance from your (workstation)
+- **3.1:** Ping the Public IP/DNS of the EC2 instance from your (workstation).
+- **3.2:** Browse **over HTTP** to the public IP of the EC2 instance from your (workstation).
   - Now you can successfully connect to the **public IPv4 address** of the **ExPub-Instance1** instance. 
 
     {{% /expand %}}
 
-4. Understand what's happening 
-   - IGW inherent NAT on EC2 EIP's
-   - Let's dig deeper to understand how all of this works.
+4. Let's dig deeper to understand how all of this works.
+   - IGW implicit NAT on EC2 EIP's.
 
     {{% expand title="Detailed Steps..." %}}
 
-- **4.1:** In the **EC2 Console** go to the **Instances page** select the **ExPub-Instance1** instance
+- **4.1:** In the **EC2 Console** go to the **Instances page** select the **ExPub-Instance1** instance.
+- **4.2:** click **Connect > EC2 serial console**.
+    - **Copy the instance ID** as this will be the username and click connect. 
   ![](image-t1-4.png)
-- **4.2:** click **Connect > EC2 serial console**
-    - Copy the instance ID as this will be the username and click connect. 
 - **4.3:** Login to the EC2 instance:
     - username: <<copied Instance ID from above>>
-    - Password: **`FORTInet123!` 
-- **4.4:** Run the command **`ifconfig eth0`** and take note of the instance IPv4 address
+    - Password: **`FORTInet123!`** 
+- **4.4:** Run the command **`ifconfig ens5`** and take note of the instance IPv4 address.
 - **4.5:** Run the command **`curl ipinfo.io`**.
 
   {{% notice info %}}
@@ -84,27 +83,25 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
   {{% /notice %}}
   
-- **4.7:** The VPC route table that you assigned to the public subnet has a default route to the Internet through the AWS Internet Gateway (IGW). Also this instance has an Elastic IP (EIP), a public IP, associated to it. These AWS Networking components are allowing the public inbound access to work successfully for this instance.
+- **4.7:** The VPC route table that you assigned to the public subnet has a default route to the Internet through the AWS Internet Gateway (IGW). Also this instance has an Elastic IP (EIP), a public IP, associated to it. These AWS networking components are allowing the public in/outbound access to work successfully for this instance.
      
     {{% /expand %}}
 
-<< Add visual for Routing Hops >> 
+**<< Add visual for Routing Hops >>**
 - ECHO (call out)
   - Instance RT
   - Subnet RT
   - IGW
 - ECHO REPLY (return path)
-  - IGW RT (if associated)
+  - IGW RTB (if associated)
   - Subnet RT
 
 ### Discussion Points
-- EC2's can be assigned an EIP for public reachability
-- VPC's must have an IGW associated to provide Internet access to any subnet in the VPC
-- Subnets have a default RT associated to them upon creation, allowing default reachability between all subnets in the VC 
-- You can create additional RT within a VPC, and then associate each RT to one or more subnets, altering the routing behavior of ALL TRAFFIC within that subnet.
+- EC2 instances can be assigned an EIP for public reachability.
+- VPC's must have an IGW associated to provide Internet access to any subnet in the VPC.
+- Subnets have a default RTB associated to them upon creation, allowing default reachability between all subnets in the VPC. 
+- You can create additional RTBs within a VPC, and then associate each RTB to one or more subnets, altering the routing behavior of ALL TRAFFIC within that subnet.
 - This is a very basic setup and is often used as a "hello world" demo for intro to cloud. 
-  - Without any additional actions taken, this EC2 instance is wide open to the Internet meaning it can communicate freely to anywhere on the Internet and anybody on the Internet can communicate freely to itAs we'll see later, there are already inbound probing attempts against this instance even though it was just launched in the last 30 minutes.
-
-
+  - Without any additional actions taken, this EC2 instance is wide open to the Internet, meaning it can communicate freely to anywhere on the Internet and anybody on the Internet can communicate freely to it. As we'll see later, there are already inbound probing attempts against this instance even though it was just launched in the last 30 minutes.
 
 **This concludes this task**

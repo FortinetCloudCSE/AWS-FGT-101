@@ -13,8 +13,8 @@ weight: 2
   - Add CONTENT UPDATE
   - ----------
 - AWS Network Routing
-  - AWS VPC is inherently a Software Defined Network (SDN Router)
-  - VPC Route Tables are similar to static routes in traditional routing
+  - AWS networking is [Software Defined Networking](https://www.vmware.com/topics/glossary/content/software-defined-networking.html.html) where VPCs have a built-in or implicit router
+  - VPC Route Tables (RT) are similar to static routes in traditional routing
     - Generally they are attached to a subnet impacting the destination routing decisions for that subnet only
     - Putting the pieces together, AWS routing decisions happen at every hop along the traffic path
       - Symmetrical paths are the most important rule for AWS routing

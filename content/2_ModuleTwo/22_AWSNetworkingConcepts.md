@@ -9,11 +9,11 @@ Before diving into the reference architecture for this workshop, let's review co
 
 Service Name | Defined by                               | Limitations | Affinity
 --- |------------------------------------------|-------------| ---
-VPC | CIDR block (can add multiple CIDR blocks | | lives in 1 region
+VPC | CIDR block (can add multiple CIDR blocks) | CIDR block between /16 and /28 | lives in 1 region
 Region| Large geographical area (several states) | isolated from other regions (which can be connected with TGW) | can have many VPCs
-AZ | generally 1 phsical datacenter/MAN | power, cooling, and networking are shared in an AZ | each region has multiple AZ's
-Subnets | IP subnet of the VPC's CIDR definiton | | belonds to 1 VPC and 1 AZ only
-IGW | | RT can be associated to IGW to influence routing beyond subnet (advanced scenario) | belongs to 1 VPC
+Availability Zone | generally 1 physical datacenter/MAN | power, cooling, and networking are shared in an AZ | each region has multiple AZ's
+Subnet | IP subnet of the VPC's CIDR definition | CIDR block between /16 and /28 | belongs to 1 VPC and 1 AZ only
+IGW | | VPC Route Tables (RTBs) can be associated to IGW to influence routing beyond subnet (advanced scenario) | belongs to 1 VPC
 NATGW | 1 (or more) EIPs | outbound traffic only | belongs to 1 subnet(AZ)
 EIP | single Public IP address | belongs to a VPC (verify this) | attachment to EC2, NLB/ALB, NATGW, 
 --- | --- | --- | ---
@@ -37,7 +37,7 @@ TGW | TGW routing tables, VPC attachments, | | belongs to 1 region
 - [**Transit Gateway (TGW)**](https://docs.aws.amazon.com/vpc/latest/tgw/how-transit-gateways-work.html) is a highly scalable cloud router that connects your VPCs in the same region to each other, to on-premise networks, and even to the internet through one hub. With the use of multiple route tables for a single TGW, you can design hub and spoke routing for traffic inspection and enforcement of security policy across multiple VPCs. As the name implies, [**Transit Gateway supports transitive routing**](https://docs.aws.amazon.com/vpc/latest/tgw/TGW_Scenarios.html).
   ![](image-tgw-appliance.png)
 
-### AWS Data tramsfer cost considerations
+### AWS Data transfer cost considerations
 Below is a simplified description of the most basic AWS data transfer charges.  The listed costs are examples only and change frequently based on the region in use.  Please consult [AWS documentation for costs of your specific scenario](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
 
 Transfer description | cost ($)
