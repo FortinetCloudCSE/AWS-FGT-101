@@ -20,7 +20,7 @@ weight: 4
 - **1.2:** Create an address object with the **settings shown below** and click **OK**.
 
 {{% notice tip %}}
-Dynamic address objects allows creating address objects based on resource metadata such as VPC ID, Auto Scale Group, EKS Cluster or Pod, and even Tag Name + Value pairs applied to the resource. FortiOS is using AWS API calls behind the scenes such as ec2:DescribeInstances, eks:ListClusters, eks:DescribeCluster, etc to find running resources to match based on metadata and pull their IP address information. This is done on a frequent basis to keep the dynamic address object up to date automatically.
+Dynamic address objects allows creating address objects based on resource metadata such as VPC ID, Auto Scale Group, EKS Cluster or Pod, and even Tag Name + Value pairs applied to the resource. FortiOS is using AWS API calls behind the scenes such as ec2:DescribeInstances, eks:ListClusters, eks:DescribeCluster, etc to find running resources to match based on metadata and pull their IP address information. This is done on a frequent basis to keep the dynamic address object up to date automatically. **To learn more about all the public and private clouds this feature supports, check out our [documentation](https://docs.fortinet.com/document/fortigate/7.4.3/administration-guide/753961/public-and-private-sdn-connectors)**.
 {{% /notice %}}
 
 Name | Type | Sub Type | SDN Connector | Address Type | Filter Value
@@ -42,6 +42,10 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 - **2.2:** Create a new policy with the **settings shown below** and click **OK** to allow east west traffic from Spoke1-Instance1 to Spoke2-Instance1.
 
 ![](image-t4-3.png)
+
+- **2.3:** **Validate that the dynamic address objects** are automatically populated by hovering over both objects. In the popup menu, click **View Matched Addresses** button. ProdWebFrontend should have 10.1.2.10 and ProdApiBackend 10.2.20.10.
+
+![](image-t4-4.png)
 
     {{% /expand %}}
 
