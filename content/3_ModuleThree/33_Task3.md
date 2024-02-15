@@ -98,12 +98,28 @@ In the **Application Control section** we can see details about the browser used
 - **5.2:** **Double click** a log entry to view the **Log Details**.
 
 {{% notice info %}}
-The instance has the private IP 10.1.2.10/24, but is seen as coming from a public IP. This is because the primary FortiGate is providing secured outbound access to the internet for this private EC2 instance. This is because of the **VPC routes in all the VPCs (Spoke1 and NGFW) are working together with the Transit Gateway (TGW) and Transit Gateway route tables to route** the in/outbound traffic through the primary FortiGate. This is a [**centralized design**](https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-appliance-scenario.html) that is also commonly called an appliance, inspection, or security VPC.
+The instance has the private IP 10.1.2.10/24, but is seen as coming from a public IP. This is because the primary FortiGate is providing secured outbound access to the internet for this private EC2 instance. This is because of the **VPC routes in all the VPCs (Spoke1 and Security) are working together with the Transit Gateway (TGW) and Transit Gateway route tables to route** the in/outbound traffic through the primary FortiGate. This is a [**centralized design**](https://docs.aws.amazon.com/vpc/latest/tgw/transit-gateway-appliance-scenario.html) that is also commonly called an appliance, inspection, or security VPC.
 
 Navigate to **Policy & Objects > Firewall Policy** and look at the **security profiles** being applied to the **secured-outbound-traffic-with-nat policy**. This pre-configured policy is applying source NAT to act as a NAT Gateway but is also applying advanced NGFW protection such as SSL MitM, Application Control, Intrusion Prevention, and Anti-Virus features.
 {{% /notice %}}
 
 ![]()
+
+- **5.3** Below is a step by step of the packet handling for the outbound web traffic from Spoke1-Instance1.
+
+Hop | Component | Description | Packet |
+---|---|---|---|
+1 | Spoke1-Instance1 -> 0.0.0.0/0 TGW | Spoke1-Instance1 sends outbound traffic to the VPC router (its default gw) which routes traffic to TGW as configured in the Spoke1 VPC RTB. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+2 | Spoke1-TGW-Attachment -> 0.0.0.0/0 Sec-TGW-Attachment | Spoke1-TGW-attachment is associated to the Spoke VPC TGW RTB. This TGW RTB has a default route to Sec-TGW-Attachment, so traffic is forwarded there. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+3 | Sec-TGW-Attachment -> 0.0.0.0/0 FGT1-Port2 | Sec-TGW-Attachment is attached to the Security VPC TGW Attach Subnets which have a default route to primary FortiGate1 Port2, private interface. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+4 | FGT1-Port1 -> 0.0.0.0/0 IGW | FGT1 changes the source IP to the private IP of Port1 as this has an EIP associated. FGT1 sends inspected & allowed traffic to the VPC router via Port1 (its default gw), which routes traffic to the IGW as configured in the Public Subnet VPC RTB. | **<span style="color:purple">10.0.1.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+5 | IGW -> Internet | IGW changes the source IP to the associated EIP of FortiGate1 Port1 and routes traffic to the internet. | **<span style="color:brown">z.z.z.z:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+6 | Internet -> IGW | IGW receives reply traffic and changes the source IP to the private IP of FortiGate1 Port1. The VPC router routes traffic to FortiGate1 Port1. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:purple">10.0.1.10:dst-port</span>** |
+7 | FGT1-Port2 -> 0.0.0.0/0 TGW | FGT1 receives traffic on Port1, changes the source IP to the private IP of Spoke1-Instance1, and routes inspected & allowed traffic to the VPC router (10.0.0.0/8 static route out port2) via Port2. The VPC router sends traffic to TGW as configured in the Private Subnet VPC RTB. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+8 | Sec-TGW-Attachment -> 10.1.0.0/16 Spoke1-TGW-Attachment | Sec-TGW-Attachment is associated to the Sec VPC TGW RTB. This TGW RTB has a route for Spoke1 VPC via Spoke1-TGW-Attachment, so traffic is forwarded there. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+9 | Spoke1-TGW-Attachment -> Spoke1-Instance1 | Spoke1-TGW-Attachment is attached to subnets in Spoke1 VPC which have a local VPC route to reach Spoke1-Instance1. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+
+  ![](image-t3-4.png)
 
     {{% /expand %}}
 

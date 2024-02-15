@@ -173,3 +173,13 @@ weight = 11
 name = "<i class='fas fa-tools'></i> AWS MP Listings for Fortinet"
 url = "https://aws.amazon.com/marketplace/search/results?searchTerms=fortinet"
 weight = 12
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i> Fortinet CSE Cloud Github Org"
+url = "https://github.com/FortinetCloudCSE"
+weight = 13
+
+[[menu.shortcuts]]
+name = "<i class='fas fa-tools'></i> Deep Dive on FGCP in AWS"
+url = "https://fortinetcloudcse.github.io/FGCP-in-AWS"
+weight = 14
