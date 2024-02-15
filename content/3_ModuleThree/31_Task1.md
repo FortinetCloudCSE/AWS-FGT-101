@@ -90,9 +90,9 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 Hop | Component | Description | Packet |
 ---|---|---|---|
 1 | Internet -> IGW | Inbound traffic destined to the EIP is received at the IGW. | **<span style="color:blue">x.x.x.x:src-port</span> -> <span style="color:purple">y.y.y.y:80</span>** |
-2 | IGW -> ExPub-Instance1 | IGW will change the destination IP to the private IP of ExPub-Instance1. The VPC router will route traffic to ExPub-Instance1 as configured in the default VPC route table which is assigned to the IGW. | **<span style="color:blue">x.x.x.x:src-port</span> -> <span style="color:black">10.0.1.10:80</span>** |
-3 | ExPub-Instance1 -> 0.0.0.0/0 IGW| ExPub-Instance1 receives the traffic, seeing the original public source IP, and will reply. This reply traffic is sent to the VPC router (it's default gw) which then routes the traffic to the IGW as configured in the Example-PublicRouteTable. | **<span style="color:black">10.0.1.10:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
-4 | IGW -> Internet | IGW will change the source IP to the associated EIP of ExPub-Instance1 and the IGW will route the traffic out to the internet. | **<span style="color:purple">y.y.y.y:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
+2 | IGW -> ExPub-Instance1 | IGW changes the destination IP to the private IP of ExPub-Instance1. The VPC router will route traffic to ExPub-Instance1. | **<span style="color:blue">x.x.x.x:src-port</span> -> <span style="color:black">10.0.1.10:80</span>** |
+3 | ExPub-Instance1 -> 0.0.0.0/0 IGW| ExPub-Instance1 receives the traffic, seeing the original public source IP, and replies. This traffic is sent to the VPC router (its default gw) which routes the traffic to the IGW as configured in the Example-PublicRouteTable. | **<span style="color:black">10.0.1.10:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
+4 | IGW -> Internet | IGW changes the source IP to the associated EIP of ExPub-Instance1 and routes the traffic to the internet. | **<span style="color:purple">y.y.y.y:80</span> -> <span style="color:blue">x.x.x.x:dst-port</span>** |
 
   ![](image-t1-5.png)
 

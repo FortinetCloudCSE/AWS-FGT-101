@@ -73,15 +73,15 @@ The instance has the private IP 10.0.20.10/24, but is and seen as coming from a 
 
     ![](image-t2-4.png)
 
-- **4.5** Below is a step by step of the packet handling for the outbound web traffic to ExPub-Instance1.
+- **4.5** Below is a step by step of the packet handling for the outbound web traffic from ExPriv-Instance2.
 
 Hop | Component | Description | Packet |
 ---|---|---|---|
-1 | ExPriv-Instance2 -> 0.0.0.0/0 NAT GW | ExPriv-Instance2 sends outbound traffic to the VPC router (it's default gw) which then routes the traffic to the NAT GW as configured in the Example-PrivateRouteTable. | **<span style="color:black">10.0.2.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
-2 | NAT GW -> 0.0.0.0/0 IGW | NAT GW will change the source IP to it's own private IP and send the traffic to VPC router. The VPC router will route traffic to IGW as configured in the Example-PublicRouteTable. | **<span style="color:purple">y.y.y.y:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
-3 | IGW -> Internet | IGW will change the source IP to the associated EIP of NAT GW and route the traffic out to the internet. | **<span style="color:brown">z.z.z.z:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
-4 | Internet -> IGW | IGW receives reply traffic and will change the source IP to the private IP of NAT GW and send the traffic to VPC router. The VPC router will route traffic to the NAT GW as configured in the default VPC route table assigned to the IGW. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:purple">y.y.y.y:dst-port</span>** |
-5 | NAT GW -> ExPriv-Instance2 | NAT GW will change the source IP back to the private IP of ExPriv-Instance2 and route the traffic to the VPC router which delivers the traffic to ExPriv-Instance2. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:black">10.0.2.10:dst-port</span>** |
+1 | ExPriv-Instance2 -> 0.0.0.0/0 NAT GW | ExPriv-Instance2 sends outbound traffic to the VPC router (it's default gw) which routes the traffic to NAT GW as configured in the Example-PrivateRouteTable. | **<span style="color:black">10.0.2.10:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+2 | NAT GW -> 0.0.0.0/0 IGW | NAT GW changes the source IP to its own private IP and sends the traffic to VPC router. The VPC router routes traffic to IGW as configured in the Example-PublicRouteTable. | **<span style="color:purple">y.y.y.y:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+3 | IGW -> Internet | IGW changes the source IP to the associated EIP of NAT GW and routes the traffic to the internet. | **<span style="color:brown">z.z.z.z:src-port</span> -> <span style="color:blue">x.x.x.x:80</span>** |
+4 | Internet -> IGW | IGW receives reply traffic, changes the source IP to the private IP of NAT GW, and sends the traffic to VPC router. The VPC router routes traffic to the NAT GW. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:purple">y.y.y.y:dst-port</span>** |
+5 | NAT GW -> ExPriv-Instance2 | NAT GW changes the source IP back to the private IP of ExPriv-Instance2 and routes the traffic to the VPC router which delivers the traffic to ExPriv-Instance2. | **<span style="color:blue">x.x.x.x:80</span> -> <span style="color:black">10.0.2.10:dst-port</span>** |
 
   ![](image-t2-5.png)
 

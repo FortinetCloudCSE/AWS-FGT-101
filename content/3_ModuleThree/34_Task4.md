@@ -47,6 +47,8 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 ![](image-t4-4.png)
 
+- **2.4:** 
+
     {{% /expand %}}
 
 3.  Verify connectivity from **Spoke1-Instance1**.
@@ -54,13 +56,17 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
     {{% expand title = "Detailed Steps..." %}}
 
 - **3.1:** Navigate to the **EC2 Console** and go to the **Instances page** (menu on the left).
-- **3.2:** Find & Select the **Spoke1-Instance1** instance and click **Connect > EC2 serial console**. 
+- **3.2:** Find & Select the **Spoke1-Instance1** instance and select the **Tags tab** (detail pane below) to view the tags applied to the instance. Notice the tags seen here are the metadata that the FortiOS dynamic address objects are matching against. **Search** for **app** or **env** to see just the relevant tag key and value pairs.
+
+    ![](image-t4-5.png)
+	
+- **3.3:** Find & Select the **Spoke1-Instance1** instance and click **Connect > EC2 serial console**. 
   - **Copy the instance ID** as this will be the username and click connect. 
-- **3.3:** Login to the EC2 instance:
+- **3.4:** Login to the EC2 instance:
   - username: `<<copied Instance ID from above>>`
   - Password: **`FORTInet123!`**
-- **3.4:** Run the commands **`ping -c5 10.2.20.10`** and **`curl 10.2.20.10`** to connect to private resources, successfully.
-- **3.5:** Run the command **`ssh 10.2.20.10`** to be blocked by firewall policy.
+- **3.5:** Run the commands **`ping -c5 10.2.20.10`** and **`curl 10.2.20.10`** to connect to private resources, successfully.
+- **3.6:** Run the command **`ssh 10.2.20.10`** to be blocked by firewall policy.
  
     {{% /expand %}}
 
@@ -76,6 +82,25 @@ In the **Source and Destination sections** of the log, we see the no NAT is appl
 
 We can also see denied traffic that is matching the **Implicit Deny** firewall policy.  With adding granular firewall policies & objects including dynamic address objects and security profiles, you can securely control traffic as desired.
 {{% /notice %}}
+
+- **4.3** Below is a step by step of the packet handling for the east/west web traffic from Spoke1-Instance1.
+
+Hop | Component | Description | Packet |
+---|---|---|---|
+1 | Spoke1-Instance1 -> 0.0.0.0/0 TGW | Spoke1-Instance1 sends east/west traffic to the VPC router (its default gw) which routes traffic to TGW as configured in the Spoke1 VPC RTB. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+2 | Spoke1-TGW-Attachment -> 0.0.0.0/0 Sec-TGW-Attachment | Spoke1-TGW-attachment is associated to the Spoke VPC TGW RTB. This TGW RTB has a default route to Sec-TGW-Attachment, so traffic is forwarded there. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+3 | Sec-TGW-Attachment -> 0.0.0.0/0 FGT1-Port2 | Sec-TGW-Attachment is attached to the Security VPC TGW Attach Subnets which have a default route to primary FortiGate1 Port2, private interface. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+4 | FGT1-Port2 -> 0.0.0.0/0 TGW | FGT1 sends inspected & allowed traffic to the VPC router (10.0.0.0/8 static route out port2) via Port2, which routes traffic to the TGW as configured in the Private Subnet VPC RTB. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+5 | Sec-TGW-Attachment -> 10.2.0.0/16 Spoke2-TGW-Attachment | Sec-TGW-Attachment is associated to the Sec VPC TGW RTB. This TGW RTB has a route for Spoke2 VPC via Spoke2-TGW-Attachment, so traffic is forwarded there. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+6 | Spoke2-TGW-Attachment -> Spoke2-Instance1 | Spoke2-TGW-Attachment is attached to subnets in Spoke2 VPC which have a local VPC route to reach Spoke2-Instance1. | **<span style="color:black">10.1.2.10:src-port</span> -> <span style="color:blue">10.2.20.10:80</span>** |
+7 | Spoke2-Instance1 -> 0.0.0.0/0 TGW | Spoke2-Instance1 sends reply traffic to the VPC router (its default gw) which routes traffic to TGW as configured in the Spoke1 VPC RTB. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+8 | Spoke2-TGW-Attachment -> 0.0.0.0/0 Sec-TGW-Attachment | Spoke2-TGW-attachment is associated to the Spoke VPC TGW RTB. This TGW RTB has a default route to Sec-TGW-Attachment, so traffic is forwarded there. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+9 | Sec-TGW-Attachment -> 0.0.0.0/0 FGT1-Port2 | Sec-TGW-Attachment is attached to the Security VPC TGW Attach Subnets which have a default route to primary FortiGate1 Port2, private interface. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+10 | FGT1-Port2 -> 0.0.0.0/0 TGW | FGT1 sends inspected & allowed traffic to the VPC router (10.0.0.0/8 static route out port2) via Port2, which routes traffic to the TGW as configured in the Private Subnet VPC RTB. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+11 | Sec-TGW-Attachment -> 10.1.0.0/16 Spoke1-TGW-Attachment | Sec-TGW-Attachment is associated to the Sec VPC TGW RTB. This TGW RTB has a route for Spoke1 VPC via Spoke1-TGW-Attachment, so traffic is forwarded there. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+12 | Spoke1-TGW-Attachment -> Spoke1-Instance1 | Spoke1-TGW-Attachment is attached to subnets in Spoke1 VPC which have a local VPC route to reach Spoke1-Instance1. | **<span style="color:blue">10.2.20.10:80</span> -> <span style="color:black">10.1.2.10:dst-port</span>** |
+
+  ![](image-t4-6.png)
 
     {{% /expand %}}
 
