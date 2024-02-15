@@ -8,7 +8,7 @@ weight: 3
 - Goal: Utilize the provisioned Security VPC and Transit gateway architecture to provide security for inbound flows with FortiGate NGFW.
 - Task: Create FortiGate VIP and Policy rule allowing inbound traffic to web servers.
 
-![](image-fgcp-tgw.png)
+![](../image-fgcp-tgw.png)
 
 #### Summarized Steps (click to expand each for details)
 

@@ -3,7 +3,7 @@ title: "Introduction"
 weight: 1
 ---
 
-# FortiGate: Protecting AWS Resources
+# FortiGate: Protecting AWS Traffic Flows
 
 ## Learning Objectives
 
@@ -34,6 +34,6 @@ Fortinet & AWS components used during this workshop:
     * **Ingress + Egress in a single VPC**
     * **Centralized Inspection of Ingress + Egress + East/West with multiple VPCs**
 
-![](image-vpc-example.png)
+![](3_modulethree/image-vpc-example.png)
 
-![](image-fgcp-tgw.png)
+![](FTNTSecVPC-simple.png)

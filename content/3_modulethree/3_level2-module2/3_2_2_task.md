@@ -8,7 +8,7 @@ weight: 4
 - Goal: Utilize the provisioned Security VPC and Transit gateway architecture to provide security for East/West (Inter-VPC) flows with FortiGate NGFW.
 - Task: Create FortiGate Policy objects and rules allowing East/West traffic to Acme Corp resources.
 
-![](image-fgcp-tgw.png)
+![](../image-fgcp-tgw.png)
 
 #### Summarized Steps (click to expand each for details)
 

@@ -14,7 +14,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
 {{% /notice %}}
 
-![](image-vpc-example.png)
+![](../image-vpc-example.png)
 
 
 #### Summarized Steps (click to expand each for details)

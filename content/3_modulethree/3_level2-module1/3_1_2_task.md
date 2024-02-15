@@ -12,7 +12,7 @@ weight: 2
 There are no security controls in this example. However, NATGW is a 1-way service, only allowing connectivity outbound.  While ExPriv-Instance2 can freely browse the Internet (outbound), no Internet hosts can connect to it (inbound).
 {{% /notice %}}
 
-![](image-vpc-example.png)
+![](../image-vpc-example.png)
 
 #### Summarized Steps (click to expand each for details)
 

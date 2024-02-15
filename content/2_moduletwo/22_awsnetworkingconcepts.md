@@ -5,6 +5,25 @@ weight: 2
 
 ![](AWS_networking.png)
 
+### AWS Network Routing
+  - AWS networking is [Software Defined Networking](https://www.vmware.com/topics/glossary/content/software-defined-networking.html.html) where VPCs have a built-in or implicit router
+  - VPC Route Tables (RT) are similar to static routes in traditional routing
+    - Generally they are attached to a subnet impacting the destination routing decisions for that subnet only
+    - Putting the pieces together, AWS routing decisions happen at every hop along the traffic path
+      {{% notice tip %}} 
+
+Symmetrical paths are the most important rule for AWS routing
+  - Traffic must follow the same path in the outbound and inbound direction
+
+     {{% /notice %}}
+    - Sometimes RT can be associated with services (like IGW) allowing special routing decisions in specific scenarios
+  - Every VPC has a default RT which allows communication between all subnets in the VPC
+    - Every newly created subnet is associated with this default RT
+    - you cannot change the VPC CIDR route entry in the default RT
+    - You can add more specific subnet routes to a RT to do things like FortiGate NGFW Inspection of traffic _BETWEEN Subnets_ in a VPC
+
+### AWS Networking Services
+
 Before diving into the reference architecture for this workshop, let's review core AWS networking concepts. **Click the hyperlinks for AWS documentation**.
 
 Service Name | Defined by                               | Limitations | Affinity
@@ -38,21 +57,32 @@ TGW | TGW routing tables, VPC attachments, | | belongs to 1 region
   ![](image-tgw-appliance.png)
 
 ### AWS Data transfer cost considerations
-Below is a simplified description of the most basic AWS data transfer charges.  The listed costs are examples only and change frequently based on the region in use.  Please consult [AWS documentation for costs of your specific scenario](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
+Below is a simplified description of the most basic AWS networking & data transfer charges.  The listed costs are examples only and change frequently based on the region in use.  Please consult [AWS documentation for costs of your specific scenario](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
+
+{{% notice note %}}
+
+Any specific pricing listed below is for estimation purposes only.  Please reference the [AWS Cost Calculator](https://calculator.aws/#/) for the most up-to-date pricing for your infrastructure. 
+{{% /notice %}}
+
+{{% notice tip %}}
+
+Workshop participants running this workshop during a Fortinet event will not incur any AWS charges.
+
+{{% /notice %}}
 
 Transfer description | cost ($)
 --- | ---
 Inbound (from Internet) | $0.00 (Free)
-Outbound (to Internet) | $0.09 (volume discounts apply)
+Outbound (to Internet) | $0.09/GB (volume discounts apply)
 Within an AZ | $0.00 (Free)
 Across AZs (within Region) | $0.01/GB
-Across Regions | xyz
+Across Regions | $0.01-0.02/GB
 --- | ---
 AWS Service costs | cost ($)
-VPC Peering | 1 
-TGW | 2
-IGW | 3
-NATGW | 4 
-EIP | 5
+VPC Peering | $0.00 (Free)
+TGW | [See AWS TGW Pricing](https://aws.amazon.com/transit-gateway/pricing/)
+IGW | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/)
+NATGW | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/) 
+EIP | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/)
 
 In this workshop we will use these components to highlight insertion of FortiGate NGFW into an enterprise architecture. 

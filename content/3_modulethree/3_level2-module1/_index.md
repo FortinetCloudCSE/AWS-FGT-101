@@ -3,8 +3,6 @@ title: "AWS Networking"
 weight: 1
 ---
 
-# AWS Foundational Networking: 
-
 In this section, we'll learn about Single VPC traffic flows.  
 
 - AWS defines a subnet as public if its instances use an Elastic IP (EIP) and have direct inbound & outbound access to the Internet
@@ -15,4 +13,4 @@ In this section, we'll learn about Single VPC traffic flows.
 
   2. [Private Outbound Internet flows w/ NATGW](3_level2-module1/3_1_2_task.html)
 
-![](image-vpc-example.png)
+![](../image-vpc-example.png)

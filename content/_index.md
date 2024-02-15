@@ -30,7 +30,7 @@ archetype: home
   - Traffic Protection with NGFW featuring FortiGate FortiGuard advanced protection
 {{% /notice %}}
 
-![](image-fgcp-tgw.png)
+![](1_moduleone/FTNTSecVPC-simple.png)
 
 ## Workshop Goals
 

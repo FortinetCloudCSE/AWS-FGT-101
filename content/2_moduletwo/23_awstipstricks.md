@@ -9,22 +9,16 @@ weight: 2
 - Its often helpful to open each new service in its own tab.  That way, you can refer back to each service independently without losing the info on your screen.
   - This trick is also useful when working in multiple regions.  Just be careful you make a change in the appropriate region!
 - Search/filter within a service
-  - ----------
-  - Add CONTENT UPDATE
-  - ----------
-- AWS Network Routing
-  - AWS networking is [Software Defined Networking](https://www.vmware.com/topics/glossary/content/software-defined-networking.html.html) where VPCs have a built-in or implicit router
-  - VPC Route Tables (RT) are similar to static routes in traditional routing
-    - Generally they are attached to a subnet impacting the destination routing decisions for that subnet only
-    - Putting the pieces together, AWS routing decisions happen at every hop along the traffic path
-      {{% notice tip %}} 
+  - Often, when working with AWS services, it can be confusing matching a particular item to its "owner"
+    - e.g.  Every Subnet and RT belongs to a single VPC.
+    - Identifying a specific RT from a long list of all RT in a region can be difficult
+    - You can use the filters in leftnav, or top-middle search bar to filter and narrow down the viewable items
+    - In the VPC Dashboard, you can filter subnets or RT to a specific VPC to help more easily identify the one you need
+     ![](AWSServiceFilter.png)
+- Working in different AWS regions
+  - The AWS console displays services for 1 Region only.
+  - If you need to work with resources in different regions, you can open multiple browser tabs to view Service consoles in different regions
+  - The example below shows VPCs in US-WEST-1(N. California) & US-East-1(N. Virginia)
+  - Be careful when working between regions, ensuring you make changes to the appropriate region's services
+   ![](AWSRegionTabs.png)
 
-Symmetrical paths are the most important rule for AWS routing
-  - Traffic must follow the same path in the outbound and inbound direction
-
-     {{% /notice %}}
-    - Sometimes RT can be associated with services (like IGW) allowing special routing decisions in specific scenarios
-  - Every VPC has a default RT which allows communication between all subnets in the VPC
-    - Every newly created subnet is associated with this default RT
-    - you cannot change the VPC CIDR route entry in the default RT
-    - You can add more specific subnet routes to a RT to do things like FortiGate NGFW Inspection of traffic _BETWEEN Subnets_ in a VPC
