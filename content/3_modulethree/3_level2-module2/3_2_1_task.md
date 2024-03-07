@@ -4,11 +4,14 @@ weight: 3
 ---
 
 
-## FortiGate Security VPC in Centralized Architecture with TGW 
-- Goal: Utilize the provisioned Security VPC and Transit gateway architecture to provide security for inbound flows with FortiGate NGFW.
-- Task: Create FortiGate VIP and Policy rule allowing inbound traffic to web servers.
+## **FortiGate Security VPC in Centralized Architecture with TGW** 
+|                            |    |  
+|----------------------------| ----
+| **Goal**                   | Utilize the provisioned Security VPC and Transit gateway architecture to provide security for inbound flows with FortiGate NGFW.
+| **Task**                   | Create FortiGate VIP and Policy rule allowing inbound traffic to web servers.
+| **Verify task completion** | Confirm inbound VPC connectivity from Internet via Browser session to FortiGate VM from your laptop/workstation 
 
-![](../image-fgcp-tgw.png)
+[](../image-fgcp-tgw.png)
 
 #### Summarized Steps (click to expand each for details)
 

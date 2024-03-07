@@ -4,9 +4,12 @@ weight: 1
 ---
 
 
-## Public Inbound: Single VPC with IGW
-- Goal: Establish Internet access for EC2 Public instance (inbound + outbound).
-- Task: Adjust the route table associations so you can ping ExPub-Instance1.
+## **Public Inbound: Single VPC with IGW**
+|                            |    |  
+|----------------------------| ----
+| **Goal**                   | Establish Internet access for EC2 Public instance (inbound + outbound).
+| **Task**                   | Adjust the route table associations so you can ping ExPub-Instance1.
+| **Verify task completion** | Confirm inbound VPC connectivity to EC2 Instance via Ping the EC2 Public instance from your laptop/workstation 
 
 {{% notice warning %}} 
 

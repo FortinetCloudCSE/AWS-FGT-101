@@ -5,6 +5,16 @@ weight: 2
 
 ## Helpful tips when working with AWS console
 
+### Navigating the AWS Console
+
+- Upon login the Console Home page is displayed.
+- Use the **Search Box** at the top to search for services such as EC2, VPC, etc.
+- When results appear, **right click** the service name to open the desired console in a new tab. 
+  - Multiple tabs simplifies navigation when using multiple AWS services.
+
+![](image-awsconsole1.png)
+
+
 ### General
 - Its often helpful to open each new service in its own tab.  That way, you can refer back to each service independently without losing the info on your screen.
   - This trick is also useful when working in multiple regions.  Just be careful you make a change in the appropriate region!

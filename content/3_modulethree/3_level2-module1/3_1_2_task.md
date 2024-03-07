@@ -4,9 +4,12 @@ weight: 2
 ---
 
 
-## Private Outbound: Single VPC with NATGW 
-- Goal: Establish outbound only Internet access for EC2 Private instance.
-- Task: Adjust the route table associations so ExPriv-Instance1 can reach the Internet.
+## **Private Outbound: Single VPC with NATGW** 
+|                            |    |  
+|----------------------------| ----
+| **Goal**                   | Establish outbound only Internet access for EC2 Private instance.
+| **Task**                   | Adjust the route table associations so ExPriv-Instance1 can reach the Internet.
+| **Verify task completion** | Confirm outbound VPC connectivity from EC2 Instance via Ping to Internet from the EC2 instance
 
 {{% notice warning %}} 
 There are no security controls in this example. However, NATGW is a 1-way service, only allowing connectivity outbound.  While ExPriv-Instance2 can freely browse the Internet (outbound), no Internet hosts can connect to it (inbound).

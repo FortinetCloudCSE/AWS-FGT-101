@@ -4,9 +4,12 @@ weight: 4
 ---
 
 
-## FortiGate Security VPC securing East/West Traffic
-- Goal: Utilize the provisioned Security VPC and Transit gateway architecture to provide security for East/West (Inter-VPC) flows with FortiGate NGFW.
-- Task: Create FortiGate Policy objects and rules allowing East/West traffic to Acme Corp resources.
+## **FortiGate Security VPC securing East/West Traffic**
+|                            |    |  
+|----------------------------| ----
+| **Goal**                   | Utilize the provisioned Security VPC and Transit gateway architecture to provide security for East/West (Inter-VPC) flows with FortiGate NGFW.
+| **Task**                   | Create FortiGate Policy objects and rules allowing East/West traffic to Acme Corp resources.
+| **Verify task completion** | Confirm east/west VPC connectivity from EC2 Instance in _Spoke1_ via Ping to EC2 instance in _Spoke 2_
 
 ![](../image-fgcp-tgw.png)
 
