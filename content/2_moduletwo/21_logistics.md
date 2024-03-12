@@ -4,7 +4,12 @@ weight: 1
 ---
 
 
+#### LaunchDemoForm
+{{< launchdemoform labdefinition="aws-fgt-101">}}
+
 ## Accessing QwikLabs & AWS environment
+
+
 
 Fortinet Cloud Workshops, will use [**QwikLabs**](https://fortinet.qwiklabs.com/paths) to provide a pre-staged AWS account with the workshop environment.
 
