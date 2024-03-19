@@ -22,7 +22,7 @@ weight: 2
   - Often, when working with AWS services, it can be confusing matching a particular item to its "owner"
     - e.g.  Every Subnet and RT belongs to a single VPC.
     - Identifying a specific RT from a long list of all RT in a region can be difficult
-    - You can use the filters in leftnav, or top-middle search bar to filter and narrow down the viewable items
+    - You can use the filters in left-nav, or top-middle search bar to filter and narrow down the viewable items
     - In the VPC Dashboard, you can filter subnets or RT to a specific VPC to help more easily identify the one you need
      ![](AWSServiceFilter.png)
 - Working in different AWS regions
