@@ -38,7 +38,7 @@ weight: 3
 
     {{% expand title = "Detailed Steps..." %}}
 
-- **2.1:**  Navigate to **Policy & Objects > Firewall Policy** and click **Use new layout when prompted**, then click **Create new**. 
+- **2.1:** Navigate to **Policy & Objects > Firewall Policy** and click **Use new layout when prompted**, then click **Create new**. 
 
 {{% notice tip %}}
 If you accidentally did not use the new layout, you can change it by clicking on **Classic Layout** in the top right and switch to **Use new layout**.
