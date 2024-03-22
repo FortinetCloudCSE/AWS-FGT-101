@@ -159,7 +159,12 @@ enableEmoji = true
   # For external links you can define how they are opened in your browser; this setting will only be applied to the content area but not the shortcut menu
   externalLinkTarget = "_blank"
 
-[[menu.shortcuts]] 
+#[[menu.shortcuts]]
+#name = "<i class='fas fa-print'></i> Single Page View (for printing)"
+#url = "allpages.html"
+#weight = 1
+
+[[menu.shortcuts]]
 name = "<i class='far fa-lightbulb'></i> Fortinet's AWS Microsite"
 url = "https://fortinet.com/aws"
 weight = 10

@@ -7,6 +7,14 @@ weight: 1
 #### LaunchDemoForm
 {{< launchdemoform labdefinition="aws-fgt-101">}}
 
+{{< notice warning >}} 
+
+After submitting, this page will return with a blank email address box and no other indications.
+
+\*\*\* __PLEASE DO NOT SUBMIT MULTIPLE TIMES__ \*\*\*  
+
+{{< /notice >}}
+
 ## Accessing QwikLabs & AWS environment
 
 

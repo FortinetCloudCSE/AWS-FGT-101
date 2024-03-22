@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Site.Title}}</title>
+    <link href='{{"css/fontawesome-all.min.css" | relURL}}' rel="stylesheet" media="print"
+        onload="this.media='all';this.onload=null;">
+    <link href='{{"css/nucleus.css" | relURL}}' rel="stylesheet">
+    <link href='{{"css/auto-complete.css" | relURL}}' rel="stylesheet" media="print"
+        onload="this.media='all';this.onload=null;">
+    <link href='{{"css/perfect-scrollbar.min.css" | relURL}}' rel="stylesheet">
+    <link href='{{"css/fonts.css" | relURL}}' rel="stylesheet" media="print"
+        onload="this.media='all';this.onload=null;">
+    <link href='{{"css/theme.css" | relURL}}' rel="stylesheet">
+    <link href='{{"css/theme-Demo.css" | relURL}}' rel="stylesheet" id="variant-style">
+    <link href='{{"css/variant.css" | relURL}}' rel="stylesheet">
+    <link href='{{"css/print.css" | relURL}}' rel="stylesheet" media="print">
+    <link href='{{"css/ie.css" | relURL}}' rel="stylesheet">
+    <style>
+        /* override the default flex layout */
+        body {
+            display: block;
+            padding: 3rem;
+            font-family: Inter, Helvetica, Tahoma, Verdana, sans-serif;
+        }
+
+        #print-button {
+            position: fixed;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: x-large;
+        }
+
+        #print-copyright {
+            display: none;
+        }
+
+        img:not(.inline):not(.lightbox-image) {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media print {
+            #print-copyright {
+                margin-top: 5rem;
+                display: block;
+                font-size: x-small;
+                color: gray;
+
+                border-top: 1px solid gray;
+                padding-top: 1rem;
+            }
+
+            .no-print,
+            .no-print * {
+                display: none !important;
+            }
+
+            .pagebreak {
+                page-break-before: always;
+            }
+        }
+    </style>
+    {{ partial "custom-header.html" . }}
+</head>
+
+<body>
+    <a id="print-button" class="no-print" title="Print this page" href="#" onclick="window.print();return false;"><i
+            class='fas fa-print'></i></a>
+
+    <h1>{{.Site.Title }}</h1>
+    {{ with .Site.Home }}
+    {{ $modifiedContent :=replace .Content " loading=\"lazy\"" "" }}
+    {{ $modifiedContent |safeHTML }}
+    <div class="pagebreak"></div>
+    {{ end }}
+    {{ range .Site.Sections }}
+    {{ partial "ap-print-section.hugo" . }}
+    {{ end }}
+
+
+    <div id="print-copyright">
+        Copyright© {{ dateFormat "2006" now }} Fortinet, Inc. All rights reserved. Fortinet®, FortiGate®, FortiCare® and
+        FortiGuard®, and
+        certain other marks are registered trademarks of Fortinet, Inc., and other Fortinet names herein may also be
+        registered and/or common law trademarks of Fortinet. All other product or company names may be trademarks of
+        their respective owners. Performance and other metrics contained herein were attained in internal lab tests
+        under ideal conditions, and actual performance and other results may vary. Network variables, different network
+        environments and other conditions may affect performance results. Nothing herein represents any binding
+        commitment by Fortinet, and Fortinet disclaims all warranties, whether express or implied, except to the extent
+        Fortinet enters a binding written contract, signed by Fortinet’s General Counsel, with a purchaser that
+        expressly warrants that the identified product will perform according to certain expressly-identified
+        performance metrics and, in such event, only the specific performance metrics expressly identified in such
+        binding written contract shall be binding on Fortinet. For absolute clarity, any such warranty will be limited
+        to performance in the same ideal conditions as in Fortinet’s internal lab tests. Fortinet disclaims in full any
+        covenants, representations, and guarantees pursuant hereto, whether express or implied. Fortinet reserves the
+        right to change, modify, transfer, or otherwise revise this publication without notice, and the most current
+        version of the publication shall be applicable.
+    </div>
+</body>
+
+</html>

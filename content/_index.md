@@ -6,28 +6,22 @@ archetype: home
 
 ## Acme Corp is migrating on prem apps/workloads to AWS Public cloud
 
-- 3 tier web apps 
-  - ---------
-  - (ToBe revised)
-  - ---------
-- On-prem to cloud secure connectivity
-
-- ACME CISO
-  - Concerns
-    - Exposure to Internet attacks
-    - Environment and App segmentation to reduce exploit blast radius 
-  - Corporate Requirements 
-    - Regional HA architecture (multi AZ)
-    - Traffic Protection with NGFW featuring FortiGate FortiGuard advanced protection
+- 3 tier web apps (Front end, middleware, database)
 
 {{% notice tip %}}
-**CISO's typically have the following concerns and requirements** when migrating applications & workloads to public cloud. In this workshop you will **learn how FortiGates can address this**.
+**CISO's typically have the following concerns and requirements** when migrating applications & workloads to public cloud. 
+
+In this workshop you will **learn how FortiGates can address the following:**
+
 - Concerns:
-  - Exposure to Internet attacks
+  - Exposure to Inbound Internet attacks
   - Environment and App segmentation to reduce exploit blast radius
+  - NGFW protection & URL filtering for outbound web traffic 
+  - Simple security policy across Corporate Cyber Infrastructure
 - Corporate Requirements:
   - Regional HA architecture (multi AZ)
   - Traffic Protection with NGFW featuring FortiGate FortiGuard advanced protection
+  - Log of all traffic (blocked and allowed)
 {{% /notice %}}
 
 ![](1_moduleone/FTNTSecVPC-simple.png)
