@@ -17,13 +17,13 @@ weight: 4
 
 1. Create Dynamic Address Objects.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **1.1:** In the FortiGate GUI, navigate to **Policy & Objects > Addresses**, and click **Create new**.
 - **1.2:** Create an address object with the **settings shown below** and click **OK**.
 
 {{% notice tip %}}
-Dynamic address objects allows creating address objects based on resource metadata such as VPC ID, Auto Scale Group, EKS Cluster or Pod, and even Tag Name + Value pairs applied to the resource. FortiOS is using AWS API calls behind the scenes such as ec2:DescribeInstances, eks:ListClusters, eks:DescribeCluster, etc to find running resources to match based on metadata and pull their IP address information. This is done on a frequent basis to keep the dynamic address object up to date automatically. **To learn more about all the public and private clouds this feature supports, check out our [documentation](https://docs.fortinet.com/document/fortigate/7.4.3/administration-guide/753961/public-and-private-sdn-connectors)**.
+Dynamic address objects allows creating address objects based on resource metadata such as VPC ID, Auto Scale Group, EKS Cluster or Pod, and even Tag Name + Value pairs applied to the resource. FortiOS is using AWS API calls behind the scenes such as ec2:DescribeInstances, eks:ListClusters, eks:DescribeCluster, etc to find running resources to match based on metadata and pull their IP address information. This is done on a frequent basis to keep the dynamic address object up to date automatically. **To learn more about all the public and private clouds this feature supports, check out our [**documentation**](https://docs.fortinet.com/document/fortigate/7.4.3/administration-guide/753961/public-and-private-sdn-connectors)**.
 {{% /notice %}}
 
 Name | Type | Sub Type | SDN Connector | Address Type | Filter Value
@@ -39,7 +39,7 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 2. Create Firewall Policy permitting East/West Traffic.
     
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **2.1:** Navigate to **Policy & Objects > Firewall Policy** and click **Create new**.
 - **2.2:** Create a new policy with the **settings shown below** and click **OK** to allow east west traffic from Spoke1-Instance1 to Spoke2-Instance1.
@@ -56,7 +56,7 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 3.  Verify connectivity from **Spoke1-Instance1**.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **3.1:** Navigate to the **EC2 Console** and go to the **Instances page** (menu on the left).
 - **3.2:** Find & Select the **Spoke1-Instance1** instance and select the **Tags tab** (detail pane below) to view the tags applied to the instance. Notice the tags seen here are the metadata that the FortiOS dynamic address objects are matching against. **Search** for **app** or **env** to see just the relevant tag key and value pairs.
@@ -75,7 +75,7 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 4. Let's dig deeper to understand how all of this works.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **4.1:** Navigate to **Log & Report > Forward Traffic** and you should logs for the traffic you generated. 
 - **4.2:** **Double click** a log entry to view the **Log Details**.

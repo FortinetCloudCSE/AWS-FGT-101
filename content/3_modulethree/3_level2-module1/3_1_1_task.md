@@ -24,7 +24,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
 1. Find the EC2 Instance Public IP and verify it's currently inaccessible.
 
-    {{% expand title="Detailed Steps..." %}}
+    {{% expand title="**Detailed Steps...**" %}}
 
 - **1.1:** In your AWS account, navigate to the **EC2 Console** and go to the **Instances page** (menu on the left).
 - **1.2:** Find the **ExPub-Instance1** instance, and copy the **Public IP address**.
@@ -36,7 +36,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
 2. Identify the route table and examine routes, then associate the route table to the proper subnet.
 
-    {{% expand title="Detailed Steps..." %}}
+    {{% expand title="**Detailed Steps...**" %}}
 
 - **2.1:** Navigate to the **VPC Console** and go to the **Subnets page** (menu on the left).
 - **2.2:** Find the **Example-PublicSubnet1** subnet & Select the **Route table tab**.
@@ -49,18 +49,24 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
 3. Verify communication to the EC2 Instance Public IP. 
 
-    {{% expand title="Detailed Steps..." %}}
+    {{% expand title="**Detailed Steps...**" %}}
 
 - **3.1:** Ping the Public IP/DNS of the EC2 instance from your (workstation).
 - **3.2:** Browse **over HTTP** to the public IP of the EC2 instance from your (workstation).
   - Now you can successfully connect to the **public IPv4 address** of the **ExPub-Instance1** instance. 
 
+  {{% notice warning %}}
+    
+If you are unable to access the instance webpage, you may need to disconnect from your corporate VPN or change your Web Filter settings to allow access. An upstream proxy or web filter is blocking access.
+
+  {{% /notice %}}
+  
     {{% /expand %}}
 
 4. Let's dig deeper to understand how all of this works.
    - IGW implicit NAT on EC2 EIP's.
 
-    {{% expand title="Detailed Steps..." %}}
+    {{% expand title="**Detailed Steps...**" %}}
 
 - **4.1:** In the **EC2 Console** go to the **Instances page** select the **ExPub-Instance1** instance.
 - **4.2:** click **Connect > EC2 serial console**.
@@ -74,7 +80,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
   {{% notice info %}}
     
-  The instance has the private IP 10.0.1.10/24, but is reachable by and seen as the associated public IP. This is because an [Elastic IP (EIP)](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html) is a 1 to 1 NAT service provided by the [AWS Internet Gateway (IGW)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
+  The instance has the private IP 10.0.1.10/24, but is reachable by and seen as the associated public IP. This is because an [**Elastic IP (EIP)**](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html) is a 1 to 1 NAT service provided by the [**AWS Internet Gateway (IGW)**](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
     
   {{% /notice %}}
 
@@ -82,7 +88,7 @@ There are no security controls in this example. ExPub-Instance1 can freely commu
 
   {{% notice info %}}
 
-  The instance has a default route going to the private IP of 10.0.1.1. This is the AWS VPC router (aka intrinsic router), which is the first host IP in any subnet within a VPC. Reference this [AWS document](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html#subnet-sizing-ipv4) to learn what other IPs in a subnet are always used by AWS.
+  The instance has a default route going to the private IP of 10.0.1.1. This is the AWS VPC router (aka intrinsic router), which is the first host IP in any subnet within a VPC. Reference this [**AWS document**](https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html#subnet-sizing-ipv4) to learn what other IPs in a subnet are always used by AWS.
 
   {{% /notice %}}
   

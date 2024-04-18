@@ -11,13 +11,13 @@ weight: 3
 | **Task**                   | Create FortiGate VIP and Policy rule allowing inbound traffic to web servers.
 | **Verify task completion** | Confirm inbound VPC connectivity from Internet via Browser session to FortiGate VM from your laptop/workstation 
 
-[](../image-fgcp-tgw.png)
+![](../image-fgcp-tgw.png)
 
 #### Summarized Steps (click to expand each for details)
 
 1. Login for FortiGate GUI and add a VIP.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **1.1:** Login to the FortiGate GUI, using the **Fgt** outputs in the QwikLabs Console.
   - The **fgtclusterurl, fgtuser, and fgtpassword** outputs will be available on the left side of the Qwiklabs console. 
@@ -36,7 +36,7 @@ weight: 3
 
 2. Add a Firewall Policy allowing inbound traffic to the newly created VIP.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **2.1:** Navigate to **Policy & Objects > Firewall Policy** and click **Use new layout when prompted**, then click **Create new**. 
 
@@ -56,23 +56,29 @@ Please make sure to **disable NAT** so the web server can see your public IP ins
 
 3.  Test the newly created VIP & policy.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **3.1:** Open a new browser tab on your workstation and browse to **http://**FgtClusterLoginURL****. 
   - You should see a web page showing details about **Spoke1-Instance1**.
   - If NAT was disabled, **you should see your public IP** on the web page.
 
+  {{% notice warning %}}
+    
+If you are unable to access the instance webpage, you may need to disconnect from your corporate VPN or change your Web Filter settings to allow access. An upstream proxy or web filter is blocking access.
+
+  {{% /notice %}}
+
     {{% /expand %}}
   
 4. Let's dig deeper to understand how all of this works.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **4.1:** In the FortiGate GUI navigate to **Log & Report > Forward Traffic** and you should see logs for the traffic you generated. 
 - **4.2:** **Double click** a log entry to view the **Log Details**.
 
 {{% notice info %}}
-In the **Source section** of the log, we see the original public IP and country/region of the client. In the **Destination section**, we see that the original destination is the private IP of port1 of the primary FortiGate. This is because the public IP you navigated to is an Elastic IP (EIP) which is a 1 to 1 NAT service provided by the [AWS Internet Gateway (IGW)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html). We also see the destination NAT IP is the private IP of Spoke1-Instance1 because of the [VIP object](https://fortinetcloudcse.github.io/FGCP-in-AWS/7_usecases/71_usecase1.html) that was matched.
+In the **Source section** of the log, we see the original public IP and country/region of the client. In the **Destination section**, we see that the original destination is the private IP of port1 of the primary FortiGate. This is because the public IP you navigated to is an Elastic IP (EIP) which is a 1 to 1 NAT service provided by the [**AWS Internet Gateway (IGW)**](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html). We also see the destination NAT IP is the private IP of Spoke1-Instance1 because of the [**VIP object**](https://fortinetcloudcse.github.io/FGCP-in-AWS/7_usecases/71_usecase1.html) that was matched.
 
 In the **Application Control section** we can see details about the browser used. Navigate to the **Security tab** of the Log Details and you can see detailed user agent information as well.
 {{% /notice %}}
@@ -94,7 +100,7 @@ In the **Application Control section** we can see details about the browser used
  
 5. Let's dig deeper to understand how all of this works.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 ![]()
 
 - **5.1:** In the FortiGate GUI navigate to **Log & Report > Forward Traffic**.  You should logs for the traffic you generated. 
@@ -129,6 +135,6 @@ Hop | Component | Description | Packet |
 ### Discussion Points
 - TGW handles inter-VPC routing for full-mesh connectivity.
 - Centralized Security VPC handles FortiGate NGFW inspection for any traffic flow (Inbound, Outbound, East/West).
-  - advanced architectures for all of these scenarios can be [found here](https://github.com/FortinetCloudCSE/.github/blob/main/profile/AWS/README.md).
+  - advanced architectures for all of these scenarios can be [**found here**](https://github.com/FortinetCloudCSE/.github/blob/main/profile/AWS/README.md).
 
 **This concludes this task**

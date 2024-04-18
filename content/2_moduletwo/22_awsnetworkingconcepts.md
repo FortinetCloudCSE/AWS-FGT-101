@@ -6,7 +6,7 @@ weight: 2
 ![](AWS_networking.png)
 
 ### AWS Network Routing
-  - AWS networking is [Software Defined Networking](https://www.vmware.com/topics/glossary/content/software-defined-networking.html.html) where VPCs have a built-in or implicit router
+  - AWS networking is [**Software Defined Networking**](https://www.vmware.com/topics/glossary/content/software-defined-networking.html.html) where VPCs have a built-in or implicit router
   - VPC Route Tables (RT) are similar to static routes in traditional routing
     - Generally they are attached to a subnet impacting the destination routing decisions for that subnet only
     - Putting the pieces together, AWS routing decisions happen at every hop along the traffic path
@@ -57,11 +57,11 @@ TGW | TGW routing tables, VPC, VPN, DXC and other attachments | 5,000 attachment
   ![](image-tgw-appliance.png)
 
 ### AWS Data transfer cost considerations
-Below is a simplified description of the most basic AWS networking & data transfer charges.  The listed costs are examples only and change frequently based on the region in use.  Please consult [AWS documentation for costs of your specific scenario](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
+Below is a simplified description of the most basic AWS networking & data transfer charges.  The listed costs are examples only and change frequently based on the region in use.  Please consult [**AWS documentation for costs of your specific scenario**](https://aws.amazon.com/blogs/architecture/overview-of-data-transfer-costs-for-common-architectures/)
 
 {{% notice note %}}
 
-Any specific pricing listed below is for estimation purposes only.  Please reference the [AWS Cost Calculator](https://calculator.aws/#/) for the most up-to-date pricing for your infrastructure. 
+Any specific pricing listed below is for estimation purposes only.  Please reference the [**AWS Cost Calculator**](https://calculator.aws/#/) for the most up-to-date pricing for your infrastructure. 
 {{% /notice %}}
 
 {{% notice tip %}}
@@ -80,9 +80,9 @@ Across Regions | $0.01-0.02/GB
 --- | ---
 AWS Service costs | cost ($)
 VPC Peering | $0.00 (Free)
-TGW | [See AWS TGW Pricing](https://aws.amazon.com/transit-gateway/pricing/)
-IGW | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/)
-NATGW | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/) 
-EIP | [See AWS VPC Pricing](https://aws.amazon.com/vpc/pricing/)
+TGW | [**See AWS TGW Pricing**](https://aws.amazon.com/transit-gateway/pricing/)
+IGW | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
+NATGW | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/) 
+EIP | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
 
 In this workshop we will use these components to highlight insertion of FortiGate NGFW into an enterprise architecture. 
