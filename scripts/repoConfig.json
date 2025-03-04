@@ -1,0 +1,43 @@
+{
+    "repoName": "AWS-FGT-101",
+    "author": "Hiruy Aberra, Jeff Kopko, and Jeremy Furtney",
+    "workshopTitle": "FortiGate: Protecting AWS Resources",
+    "themeVariant": "Workshop",
+    "logoBannerText": "FortiGate NGFW",
+    "logoBannerSubText": "Cloud Workshop: AWS 101",
+    "errorLevel": "warning",
+    "googleServicesID": "G-5RZBH288ST",
+    "marketingCode": "",
+    "shortcuts": [
+        {
+            "text": "Fortinet's AWS Microsite",
+            "URL": "https://fortinet.com/aws",
+            "icon": "fa-tools",
+            "weight": 10
+        },
+        {
+            "text": "Fortinet & AWS Documentation",
+            "URL": "https://docs.fortinet.com/cloud-solutions/aws",
+            "icon": "fa-tools",
+            "weight": 11
+        },
+        {
+            "text": "AWS MP Listings for Fortinet",
+            "URL": "https://aws.amazon.com/marketplace/search/results?searchTerms=fortinet",
+            "icon": "fa-tools",
+            "weight": 12
+        },
+        {
+            "text": "Fortinet CSE Cloud Github Org",
+            "URL": "https://github.com/FortinetCloudCSE",
+            "icon": "fa-tools",
+            "weight": 13
+        },
+        {
+            "text": "Deep Dive on FGCP in AWS",
+            "URL": "https://fortinetcloudcse.github.io/FGCP-in-AWS",
+            "icon": "fa-tools",
+            "weight": 14
+        }
+    ]
+}
