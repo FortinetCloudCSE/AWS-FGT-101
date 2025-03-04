@@ -1,9 +1,46 @@
 #!/bin/bash
 
-myarray=( "build" "server" "shell" "" )
+myarray=( "build" "server" "shell" "generate_toml" "update_scripts" "update_fdevsec" "upgrade_repo" )
 
-[[ "$#" > "1" ]] || [[ ! " ${myarray[*]} " =~ " $1 " ]] && echo "Usage: ./scripts/docker_run.sh [ build | server | shell ]" && exit 1
+envarray=( "prod" "dev")
 
-cmd="docker run --rm -it -v $(pwd)/content/:/home/CentralRepo/content -v $(pwd)/config.toml:/home/CentralRepo/config.toml -v $(pwd)/docs:/home/CentralRepo/public -v $(pwd)/layouts:/home/UserRepo/layouts -p 1313:1313 fortinet-hugo:latest $1"
-echo $cmd
+[[ "$#" > "2" ]] || [[ ! " ${myarray[*]} " =~ " $1 " ]] || [[ ! " ${envarray[*]} " =~ " $2 " ]] && echo "Usage: ./scripts/docker_run.sh [ build | server | generate_toml | update_scripts | update_fdevsec | shell | upgrade_repo ] [ prod | dev ]" && exit 1
+
+
+case "$2" in
+  "prod" )
+    container_name="fortinet-hugo"
+    ;;
+
+  "dev" )
+    container_name="hugotester"
+    ;;
+  *)
+    cmd=""
+    ;;
+esac
+
+case "$1" in
+  "server" | "shell" | "build" )
+    cmd="docker run --rm -it
+      -v $(pwd):/home/UserRepo
+      --mount type=bind,source=$(pwd)/hugo.toml,target=/home/CentralRepo/hugo.toml
+      -p 1313:1313 $container_name:latest $1"
+    ;;
+
+
+  "generate_toml" | "update_scripts" | "update_fdevsec" | "upgrade_repo" )
+    cmd="docker run --rm -it
+    -v $(pwd):/home/UserRepo
+    $container_name:latest $1"
+    ;;
+
+  *)
+    cmd=""
+    ;;
+esac
+
+echo "************ Here's the docker run command we're using:  "
+echo "$cmd"
+echo "************"
 $cmd
