@@ -15,4 +15,4 @@ In this section we'll work with a FortiGate Secured Centralized VPC and Transit 
 
    4. [**East-West Inter VPC flows**](3_level2-module2/3_2_1_task.html)
   
-   ![](../image-fgcp-tgw.png)
+   ![](./image-fgcp-tgw.png)

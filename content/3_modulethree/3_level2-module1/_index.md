@@ -13,4 +13,4 @@ In this section, we'll learn about Single VPC traffic flows.
 
   2. [**Private Outbound Internet flows w/ NATGW**](3_level2-module1/3_1_2_task.html)
 
-![](../image-vpc-example.png)
+![](./image-vpc-example.png)
