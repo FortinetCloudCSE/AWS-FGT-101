@@ -32,10 +32,9 @@ VPC | CIDR block (can add multiple CIDR blocks) | CIDR block between /16 and /28
 Region| Large geographical area | isolated from other regions (which can be connected with TGW) | can have many VPCs
 Availability Zone | generally 1 physical datacenter/MAN | power, cooling, and networking are shared in an AZ | each region has multiple AZ's
 Subnet | IP subnet of the VPC's CIDR definition | CIDR block between /16 and /28 | belongs to 1 VPC and 1 AZ only
-IGW | | VPC Route Tables (RTBs) can be associated to IGW to influence routing beyond subnet (advanced scenario) | belongs to 1 VPC
-NATGW | 1 (or more) EIPs | outbound traffic only | belongs to 1 subnet(AZ)
-EIP | single Public IP address | belongs to a region | attachment to EC2, NLB/ALB, NATGW
---- | --- | --- | ---
+Internet Gateway | VPC Configuration | VPC Route Tables (RTBs) can be associated to IGW to influence routing beyond subnet (advanced scenario) | belongs to 1 VPC
+NAT Gateway | 1 (or more) EIPs | outbound traffic only | belongs to 1 subnet(AZ)
+Elastic IP | single Public IP address | belongs to a region | attachment to EC2, NLB/ALB, NATGW
 VPC Peering | peering connection specifying 2 VPCs only | no transitive routing | routing path between 2 VPCs only (legacy)
 TGW | TGW routing tables, VPC, VPN, DXC and other attachments | 5,000 attachments per transit gateway | belongs to 1 region
 
@@ -77,12 +76,13 @@ Outbound (to Internet) | $0.09/GB (volume discounts apply)
 Within an AZ | $0.00 (Free)
 Across AZs (within Region) | $0.01/GB
 Across Regions | $0.01-0.02/GB
---- | ---
+
 AWS Service costs | cost ($)
+--- | ---
 VPC Peering | $0.00 (Free)
-TGW | [**See AWS TGW Pricing**](https://aws.amazon.com/transit-gateway/pricing/)
-IGW | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
-NATGW | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/) 
-EIP | [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
+TGW | $0.02/GB + $0.05/hr (per attachment) [**See AWS TGW Pricing**](https://aws.amazon.com/transit-gateway/pricing/)
+IGW |  $0.00 (Free) [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
+NATGW | $0.045/GB + $0.045/hr [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/) 
+EIP | $0.005/hr [**See AWS VPC Pricing**](https://aws.amazon.com/vpc/pricing/)
 
 In this workshop we will use these components to highlight insertion of FortiGate NGFW into an enterprise architecture. 

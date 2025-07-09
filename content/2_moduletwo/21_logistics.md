@@ -3,26 +3,12 @@ title: "Workshop Logistics"
 weight: 1
 ---
 
-
-#### LaunchDemoForm
-{{< launchdemoform labdefinition="aws-fgt-101">}}
-
-{{< notice warning >}} 
-
-After submitting, this page will return with a blank email address box and no other indications.
-
-\*\*\* __PLEASE DO NOT SUBMIT MULTIPLE TIMES__ \*\*\*  
-
-{{< /notice >}}
-
 ## Accessing QwikLabs & AWS environment
-
-
 
 Fortinet Cloud Workshops, will use [**QwikLabs**](https://fortinet.qwiklabs.com/paths) to provide a pre-staged AWS account with the workshop environment.
 
-- Upon login, click **Dashboard** (top of page).
-- Look for **FortiGate: Protecting AWS Resources**.
+- After logging into [**Qwiklabs**](https://fortinet.qwiklabs.com/paths), click **Dashboard** (top of page).
+- Find and select **FortiGate: Protecting AWS Resources**.
 - Click the green **Start Lab** button to begin.
 
 {{% notice warning %}}

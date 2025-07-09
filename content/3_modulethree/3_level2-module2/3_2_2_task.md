@@ -50,8 +50,6 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
 ![](image-t4-4.png)
 
-- **2.4:** 
-
     {{% /expand %}}
 
 3.  Verify connectivity from **Spoke1-Instance1**.
