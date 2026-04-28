@@ -75,7 +75,7 @@ ProdApiBackend | Dynamic | Fabric Connector Address | aws-instance-role | Privat
 
     {{% expand title = "**Detailed Steps...**" %}}
 
-- **4.1:** Navigate to **Log & Report > Forward Traffic** and you should logs for the traffic you generated. 
+- **4.1:** Navigate to **Log & Report > Forward Traffic** and you should see logs for the traffic you generated. 
 - **4.2:** **Double click** a log entry to view the **Log Details**.
 
 {{% notice info %}}

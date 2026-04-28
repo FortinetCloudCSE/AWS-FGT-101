@@ -43,7 +43,7 @@ There are no security controls in this example. However, NATGW is a 1-way servic
 - **2.2:** Find the **Example-PrivateSubnet2** subnet.
 - **2.3:** Select the **Route table tab** and click the actual route table name **rtb-.... / Example-PrivateRouteTable**.
   ![](image-t2-1.png)
-- **2.4:** Select the **Example-PublicRouteTable** then select the **Routes tab** and click **Edit routes**.
+- **2.4:** Select the **Example-PrivateRouteTable** then select the **Routes tab** and click **Edit routes**.
   ![](image-t2-2.png)
 - **2.5:** Add a default route (ie **0.0.0.0/0**) with a target of the **NAT Gateway** and click **Save changes**.
   ![](image-t2-3.png)
@@ -91,8 +91,8 @@ Hop | Component | Description | Packet |
     {{% /expand %}}
 
 ### Discussion Points
-- NAT GW providing many to 1 NAT, for outbound only.
-- No internal reachability via NATGW, so no inbound probes seen on any of the private instances.
-- General best practice, though thoroughly insufficient for overall security principles.
+- NAT GW providing many to 1 NAT, for outbound only
+- No internal reachability via NATGW, so no inbound probes seen on any of the private instances
+- General best practice, though thoroughly insufficient for overall security principles
   
 **This concludes this task**

@@ -34,6 +34,6 @@ Fortinet & AWS components used during this workshop:
     * **Ingress + Egress in a single VPC**
     * **Centralized Inspection of Ingress + Egress + East/West with multiple VPCs**
 
-![](3_modulethree/image-vpc-example.png)
+![](../3_modulethree/image-vpc-example.png)
 
 ![](FTNTSecVPC-simple.png)

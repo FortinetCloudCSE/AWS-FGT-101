@@ -133,8 +133,8 @@ Hop | Component | Description | Packet |
     {{% /expand %}}
 
 ### Discussion Points
-- TGW handles inter-VPC routing for full-mesh connectivity.
-- Centralized Security VPC handles FortiGate NGFW inspection for any traffic flow (Inbound, Outbound, East/West).
-  - advanced architectures for all of these scenarios can be [**found here**](https://github.com/FortinetCloudCSE/.github/blob/main/profile/AWS/README.md).
+- TGW handles inter-VPC routing as a regional router
+- Centralized Security VPC handles FortiGate NGFW inspection for any traffic flow (Inbound, Outbound, East/West)
+  - advanced architectures for all of these scenarios can be [**found here**](https://github.com/FortinetCloudCSE/.github/blob/main/profile/AWS/README.md)
 
 **This concludes this task**
