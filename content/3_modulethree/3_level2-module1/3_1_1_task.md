@@ -108,11 +108,11 @@ Hop | Component | Description | Packet |
     {{% /expand %}}
 
 ### Discussion Points
-- EC2 instances can be assigned an EIP for public reachability.
-- VPC's must have an IGW associated to provide Internet access to any subnet in the VPC.
-- Subnets have a default RTB associated to them upon creation, allowing default reachability between all subnets in the VPC. 
+- EC2 instances can be assigned an EIP for public reachability
+- VPC's must have an IGW associated to provide Internet access to any subnet in the VPC
+- Subnets have a default RTB associated to them upon creation, allowing default reachability between all subnets in the VPC
 - You can create additional RTBs within a VPC, and then associate each RTB to one or more subnets, altering the routing behavior of ALL TRAFFIC within that subnet.
-- This is a very basic setup and is often used as a "hello world" demo for intro to cloud. 
-  - Without any additional actions taken, this EC2 instance is wide open to the Internet, meaning it can communicate freely to anywhere on the Internet and anybody on the Internet can communicate freely to it. As we'll see later, there are already inbound probing attempts against this instance even though it was just launched in the last 30 minutes.
+- This is a very basic setup and is often used as a "hello world" demo for intro to cloud
+  - Without any additional actions taken, this EC2 instance is wide open to the Internet, meaning it can communicate freely to anywhere on the Internet and anybody on the Internet can communicate freely to it. As we'll see later, there are already inbound probing attempts against this instance even though it was just launched in the last 30 minutes
 
 **This concludes this task**
