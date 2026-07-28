@@ -1,7 +1,1 @@
-# FortiGate on AWS Securing traffic 101
-
-## Prereqs
-  - Docker
- 
-## Public view for this repo:
-https://fortinetcloudcse.github.io/AWS-FGT-101/index.html
+<h1>AWS-FGT-101</h1><h3>To view the workshop, please go here: <a href="https://fortinetcloudcse.github.io/AWS-FGT-101/">AWS-FGT-101</a></h3><hr><h3>For more information on creating these workshops, please go here: <a href="https://fortinetcloudcse.github.io/UserRepo/">FortinetCloudCSE User Repo</a></h3>

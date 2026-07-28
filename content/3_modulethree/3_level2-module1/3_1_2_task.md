@@ -21,7 +21,7 @@ There are no security controls in this example. However, NATGW is a 1-way servic
 
 1. Login to **ExPriv-Instance2** and verify it cannot access the Internet.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **1.1:** In the **EC2 Console** go to the **Instances page** (menu on the left) and select the **ExPriv-Instance2** instance.
 - **1.2:** click **Connect > EC2 serial console**.
@@ -37,13 +37,13 @@ There are no security controls in this example. However, NATGW is a 1-way servic
 
 2. Identify the relevant route table and add the proper route so 0.0.0.0/0 traffic is sent to **NATGW**.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **2.1:** Navigate to the **VPC Console** and go to the **Subnets page** (menu on the left).
 - **2.2:** Find the **Example-PrivateSubnet2** subnet.
 - **2.3:** Select the **Route table tab** and click the actual route table name **rtb-.... / Example-PrivateRouteTable**.
   ![](image-t2-1.png)
-- **2.4:** Select the **Example-PublicRouteTable** then select the **Routes tab** and click **Edit routes**.
+- **2.4:** Select the **Example-PrivateRouteTable** then select the **Routes tab** and click **Edit routes**.
   ![](image-t2-2.png)
 - **2.5:** Add a default route (ie **0.0.0.0/0**) with a target of the **NAT Gateway** and click **Save changes**.
   ![](image-t2-3.png)
@@ -52,7 +52,7 @@ There are no security controls in this example. However, NATGW is a 1-way servic
 
 3. Test Internet connectivity from **ExPriv-Instance2** again.
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 
 - **3.1:** Go back to the EC2 serial console and rerun the command **`ping -c5 8.8.8.8`** to connect to public resources successfully. 
 
@@ -60,18 +60,18 @@ There are no security controls in this example. However, NATGW is a 1-way servic
 
 4. Let's dig deeper to understand how all of this works. 
 
-    {{% expand title = "Detailed Steps..." %}}
+    {{% expand title = "**Detailed Steps...**" %}}
 	
 - **4.1:** Run the command **`ifconfig ens5`** and take note of the instance IPv4 address. 
 - **4.2:** Run the command **`curl ipinfo.io`**.
 
 {{% notice info %}}
-The instance has the private IP 10.0.20.10/24, but is and seen as coming from a public IP. This is because a [NAT Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) is providing outbound access to the internet for this private EC2 instance.
+The instance has the private IP 10.0.20.10/24, but is and seen as coming from a public IP. This is because a [**NAT Gateway**](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) is providing outbound access to the internet for this private EC2 instance.
 {{% /notice %}}
 
 - **4.3:** In the **VPC Console** go to the **NAT gateways page** (menu on the left). 
 - **4.4:** Find the **Example-NatGW** NAT Gateway and notice the public IP from the curl output matches the primary public IPv4 address assigned to NATGW. 
-  - The NAT Gateway is deployed in the **Example-PublicSubnet2** subnet which has a route to the Internet through the [AWS Internet Gateway (IGW)](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
+  - The NAT Gateway is deployed in the **Example-PublicSubnet2** subnet which has a route to the Internet through the [**AWS Internet Gateway (IGW)**](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html).
   - These AWS Networking components are allowing private outbound access to work successfully for this instance.
 
     ![](image-t2-4.png)
@@ -91,8 +91,8 @@ Hop | Component | Description | Packet |
     {{% /expand %}}
 
 ### Discussion Points
-- NAT GW providing many to 1 NAT, for outbound only.
-- No internal reachability via NATGW, so no inbound probes seen on any of the private instances.
-- General best practice, though thoroughly insufficient for overall security principles.
+- NAT GW providing many to 1 NAT, for outbound only
+- No internal reachability via NATGW, so no inbound probes seen on any of the private instances
+- General best practice, though thoroughly insufficient for overall security principles
   
 **This concludes this task**
