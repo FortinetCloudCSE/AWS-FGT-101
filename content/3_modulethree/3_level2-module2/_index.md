@@ -13,6 +13,6 @@ In this section we'll work with a FortiGate Secured Centralized VPC and Transit 
                
 - Centralized VPC can secure East/West traffic between VPC's attached to a Transit Gateway (TGW)
 
-   4. [**East-West Inter VPC flows**](3_2_1_task.html)
+   4. [**East-West Inter VPC flows**](3_2_2_task.html)
   
    ![](../image-fgcp-tgw.png)
